@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>Angular ToDo App</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link href="styles/style.css" type="text/css" rel="stylesheet" media="screen" />
+</head>
+<!-- bootstrap the app in body tag with ng-app... -->
+
+<body ng-app="todoListApp">
+    <nav class="grey darken-3" role="navigation">
+    </nav>
+
+    <header id="header">
+    </header>
+
+    <main role="main" class="main">
+        <section ng-controller="mainCtrl" class="list">
+            <h1 ng-click="helloWorld()">ToDo List</h1>
+            <div class="add">
+                <a href="" ng-click="addTodo()">+ Add Task</a>
+            </div>
+
+            <div class="item" ng-class="{'editing-item':editing, 'edited': todo.edited, 'completed': todo.completed}" ng-repeat="todo in todos | orderBy : 'completed' " ng-init="todo.completed = false">
+                <input ng-model="todo.completed" type="checkbox" />
+                <!-- span if for custom check box css / uses and svg image for unchecked and cheched states -->
+                <span ng-click="todo.completed = !todo.completed"></span>
+                <label ng-hide="editing" class="editing-label">{{todo.name}}</label>
+                <input ng-change="todo.edited=true" ng-blur="editing=false" ng-show="editing" ng-model="todo.name" class="editing-label" type="text" />
+
+                <div class="actions">
+                    <a href="" ng-click="editing= !editing">Edit</a>
+                    <a href="" ng-click="saveTodo(todo)">Save</a>
+                    <!-- $index is built in angular var representing the index/value of item in array -->
+                    <a href="" ng-click="deleteTodo(todo, $index)" class="Delete">delete</a>
+                </div>
+            </div>
+        </section>
+        <section>
+            <article>
+                <!-- call hello-world directive ..example commented out-->
+                <!-- <div hello-world></div> -->
+
+            </article>
+
+
+        </section>
+
+    </main>
+
+    <footer class="page-footer  light-blue darken-3 ">
+
+        <div class="footer-copyright ">
+            <div class="container ">
+                <p>
+                    Made by K. Anderson, All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js "></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/services/data.js"></script>
+    <script src="scripts/hello-world.js"></script>
+
+</body>
+
+</html>
